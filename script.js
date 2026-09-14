@@ -179,4 +179,62 @@ document.addEventListener('DOMContentLoaded', () => {
       showPrevImage();
     }
   });
+
+  // 4. تعقب القسم النشط في شريط التنقل (Scroll Spy)
+  const navLinks = document.querySelectorAll('.main-nav .nav-link');
+  const monitoredSections = document.querySelectorAll('section[id]');
+
+  function updateActiveNav() {
+    let currentId = '';
+    const scrollPos = window.scrollY + 200;
+
+    monitoredSections.forEach((sec) => {
+      const top = sec.offsetTop;
+      const height = sec.offsetHeight;
+      if (scrollPos >= top && scrollPos < top + height) {
+        currentId = sec.getAttribute('id');
+      }
+    });
+
+    if (currentId) {
+      navLinks.forEach((link) => {
+        const href = link.getAttribute('href');
+        if (href === `#${currentId}`) {
+          link.classList.add('active');
+          link.setAttribute('aria-current', 'page');
+        } else {
+          link.classList.remove('active');
+          link.removeAttribute('aria-current');
+        }
+      });
+    }
+  }
+
+  window.addEventListener('scroll', updateActiveNav, { passive: true });
+
+  // 5. الكشف التدريجي السلس للعناصر التحريرية (Reveal on Scroll)
+  if ('IntersectionObserver' in window) {
+    const revealTargets = document.querySelectorAll(
+      '.content-section, .banner-strip, .featured-card, .sovereign-quote, .justice-card, .manifesto-point, .gallery-item, .callout-box'
+    );
+
+    revealTargets.forEach((el) => {
+      el.classList.add('reveal-on-scroll');
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      rootMargin: '0px 0px -40px 0px',
+      threshold: 0.12
+    });
+
+    revealTargets.forEach((el) => observer.observe(el));
+  }
 });
+

@@ -100,13 +100,44 @@
 
   --transition-fast: 0.2s ease;
   --transition-smooth: 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* توكنات تجربة المستخدم المتقدمة (UI/UX Pro Max) */
+  --measure-prose: 68ch;
+  --touch-target-min: 44px;
+  --elevation-1: 0 4px 12px rgba(0, 0, 0, 0.35);
+  --elevation-2: 0 8px 24px rgba(0, 0, 0, 0.45);
+  --elevation-3: 0 16px 40px rgba(0, 0, 0, 0.65);
 }
 
-/* 3. الضبط الأساسي ومحو الهوامش */
+/* 3. الضبط الأساسي ومحو الهوامش والوصولية */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent-gold);
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: absolute;
+  top: -120px;
+  right: 1.5rem;
+  background: var(--accent-gold);
+  color: var(--text-inverse);
+  padding: 0.65rem 1.25rem;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.95rem;
+  z-index: 9999;
+  transition: top var(--transition-fast);
+}
+
+.skip-link:focus {
+  top: 1rem;
 }
 
 html {
@@ -120,7 +151,7 @@ body {
   color: var(--text-primary);
   font-family: var(--font-body);
   font-size: 1.125rem;
-  line-height: 1.95;
+  line-height: 2.1;
   direction: rtl;
   text-align: right;
   overflow-x: hidden;
@@ -250,7 +281,10 @@ button {
   font-size: 0.95rem;
   font-weight: 600;
   color: var(--text-secondary);
-  padding: 0.35rem 0;
+  padding: 0.5rem 0.25rem;
+  min-height: var(--touch-target-min);
+  display: inline-flex;
+  align-items: center;
   position: relative;
 }
 
@@ -265,11 +299,17 @@ button {
   transition: width var(--transition-fast);
 }
 
-.nav-link:hover {
+.nav-link:hover,
+.nav-link.active {
   color: var(--text-primary);
 }
 
-.nav-link:hover::after {
+.nav-link.active {
+  color: var(--accent-gold);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
   width: 100%;
 }
 
@@ -420,6 +460,20 @@ button {
   color: var(--accent-gold);
 }
 
+.meta-badge-reading {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.25rem 0.75rem;
+  background: var(--bg-glass-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-full);
+  color: var(--accent-gold);
+  font-size: 0.85rem;
+  font-weight: 600;
+  box-shadow: var(--shadow-sm);
+}
+
 /* 8. ترويسات الأقسام والفواصل */
 .section-header {
   text-align: center;
@@ -476,20 +530,21 @@ button {
 .text-block {
   display: flex;
   flex-direction: column;
-  gap: 1.35rem;
+  gap: 1.5rem;
+  max-width: var(--measure-prose);
 }
 
 .paragraph-lead {
   font-size: 1.25rem;
   font-weight: 600;
   color: var(--text-primary);
-  line-height: 1.9;
+  line-height: 2.1;
 }
 
 .paragraph {
   color: var(--text-secondary);
   font-size: 1.125rem;
-  line-height: 1.95;
+  line-height: 2.1;
 }
 
 .mt-2 {
@@ -544,13 +599,14 @@ button {
   border: 1px solid var(--border-card);
   border-radius: var(--radius-md);
   overflow: hidden;
-  box-shadow: var(--shadow-md);
-  transition: transform var(--transition-smooth), border-color var(--transition-fast);
+  box-shadow: var(--elevation-2);
+  transition: transform var(--transition-smooth), border-color var(--transition-fast), box-shadow var(--transition-smooth);
 }
 
 .featured-card:hover {
   transform: translateY(-4px);
   border-color: var(--accent-gold);
+  box-shadow: var(--elevation-3);
 }
 
 .card-img {
@@ -685,7 +741,14 @@ button {
   padding: 2rem 1.75rem;
   display: flex;
   flex-direction: column;
-  transition: transform var(--transition-smooth);
+  box-shadow: var(--elevation-1);
+  transition: transform var(--transition-smooth), border-color var(--transition-fast), box-shadow var(--transition-smooth);
+}
+
+.justice-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent-gold);
+  box-shadow: var(--elevation-2);
 }
 
 .justice-card.highlight {
@@ -866,13 +929,14 @@ button {
   border-radius: var(--radius-md);
   overflow: hidden;
   cursor: pointer;
-  box-shadow: var(--shadow-sm);
-  transition: transform var(--transition-smooth), border-color var(--transition-fast);
+  box-shadow: var(--elevation-1);
+  transition: transform var(--transition-smooth), border-color var(--transition-fast), box-shadow var(--transition-smooth);
 }
 
 .gallery-item:hover {
   transform: translateY(-5px);
   border-color: var(--accent-gold);
+  box-shadow: var(--elevation-3);
 }
 
 .gallery-thumb-wrap {
@@ -1010,6 +1074,12 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
+  transform: scale(0.96);
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.lightbox-modal.active .lightbox-content {
+  transform: scale(1);
 }
 
 .lightbox-image-container {
@@ -1312,7 +1382,20 @@ button {
   display: inline-block;
 }
 
-/* 22. تفضيلات الحركة المخفضة للوصولية */
+/* 22. تفاعلات الكشف التدريجي مع التمرير (UI/UX Pro Max) */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1), transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 23. تفضيلات الحركة المخفضة للوصولية */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
@@ -1320,5 +1403,11 @@ button {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+  .reveal-on-scroll {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
 }
+
 
