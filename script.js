@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
     shareBtn.addEventListener('click', async () => {
       const shareData = {
         title: document.title,
-        text: 'وثائقي سنوات التحصين الخمس: مواجهة الفلول والدولة العميقة وشرف جوع الكرامة | خلدون عكرمة',
+        text: 'وثائقي سنوات التحصين الخمس: مواجهة الفلول والدولة العميقة وشرف جوع الكرامة',
         url: window.location.href
       };
 
