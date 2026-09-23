@@ -7,49 +7,16 @@
 @font-face {
   font-family: 'Cairo';
   font-style: normal;
-  font-weight: 400;
+  font-weight: 200 1000;
   font-display: swap;
-  src: url('fonts/cairo-400.woff2') format('woff2');
+  src: url('fonts/Cairo-VF.woff2') format('woff2');
 }
-
-@font-face {
-  font-family: 'Cairo';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url('fonts/cairo-700.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'Cairo';
-  font-style: normal;
-  font-weight: 900;
-  font-display: swap;
-  src: url('fonts/cairo-900.woff2') format('woff2');
-}
-
 @font-face {
   font-family: 'Noto Naskh Arabic';
   font-style: normal;
-  font-weight: 400;
+  font-weight: 400 700;
   font-display: swap;
-  src: url('fonts/noto-naskh-400.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'Noto Naskh Arabic';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url('fonts/noto-naskh-600.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'Noto Naskh Arabic';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url('fonts/noto-naskh-700.woff2') format('woff2');
+  src: url('fonts/NotoNaskhArabic-VF.woff2') format('woff2');
 }
 
 /* 2. المتغيرات ولوحة الألوان السيادية - جميع الألوان تُعرّف هنا حصراً */
@@ -1270,6 +1237,7 @@ button {
 
 .social-actions {
   display: flex;
+  flex-wrap: wrap;
   gap: 0.85rem;
 }
 
@@ -1299,6 +1267,12 @@ button {
   background: var(--accent-crimson);
   border-color: var(--accent-crimson);
   color: var(--text-primary);
+  transform: translateY(-2px);
+}
+
+.social-pill.email:hover {
+  border-color: var(--accent-gold);
+  color: var(--accent-gold);
   transform: translateY(-2px);
 }
 
