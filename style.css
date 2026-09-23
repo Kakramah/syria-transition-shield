@@ -1183,31 +1183,25 @@ button {
   padding-bottom: 2.5rem;
 }
 
-.footer-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 2.5rem;
-  padding-bottom: 2.5rem;
-  border-bottom: 1px solid var(--border-subtle);
+.correction-note {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 0.5rem;
 }
 
-.footer-brand {
+.footer-card {
   display: flex;
+  flex-direction: column;
   align-items: center;
+  text-align: center;
   gap: 1rem;
 }
 
 .footer-eagle {
-  width: 44px;
-  height: 44px;
+  width: 96px;
+  height: 72px;
   object-fit: contain;
-}
-
-.footer-brand-info {
-  display: flex;
-  flex-direction: column;
+  margin: 0.5rem 0;
 }
 
 .footer-brand-name {
@@ -1215,29 +1209,33 @@ button {
   font-size: 1.15rem;
   font-weight: 700;
   color: var(--text-primary);
+  margin: 0;
 }
 
 .footer-brand-sub {
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   color: var(--text-muted);
+  margin: 0;
 }
 
-.footer-links-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-.footer-group-title {
-  font-family: var(--font-heading);
-  font-size: 0.875rem;
-  font-weight: 700;
+.footer-sig {
+  direction: ltr;
+  unicode-bidi: isolate;
+  font-size: 0.95rem;
   color: var(--accent-gold);
+  margin: 0.75rem 0 0;
+}
+
+.footer-motto {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin: 1rem 0 0;
 }
 
 .social-actions {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 0.85rem;
 }
 
@@ -1276,16 +1274,6 @@ button {
   transform: translateY(-2px);
 }
 
-.footer-bottom {
-  padding-top: 2rem;
-  text-align: center;
-}
-
-.copyright {
-  font-size: 0.9rem;
-  color: var(--text-muted);
-}
-
 /* 21. التجاوب مع مختلف الشاشات والأجهزة */
 @media (max-width: 992px) {
   .hero-title-question {
@@ -1320,6 +1308,15 @@ button {
 }
 
 @media (max-width: 640px) {
+  .social-actions {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+  .social-pill {
+    justify-content: center;
+    min-height: 44px;
+  }
   .hero-section {
     padding-top: 4.5rem;
     padding-bottom: 4.5rem;
@@ -1340,10 +1337,6 @@ button {
   }
   .state-manifesto-card {
     padding: 2.5rem 1.5rem;
-  }
-  .footer-top {
-    flex-direction: column;
-    align-items: flex-start;
   }
 }
 
